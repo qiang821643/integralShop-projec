@@ -4,10 +4,7 @@ server:
 
 spring:
   datasource:
-#    url: jdbc:oracle:thin:@47.95.228.104:1521:orcl
-#    username: KAIFA
-#    password: zsl.com
-    url: jdbc:oracle:thin:@47.94.251.90:1521:ORCL
+    url: jdbc:oracle:thin:@localhost:1521:ORCL
     username: kaifa
     password: zsl.com
     driver-class-name: oracle.jdbc.OracleDriver
@@ -28,6 +25,6 @@ logging:
 fdfs:
   so-timeout: 1500
   connect-timeout: 600
-#  tracker-list: 47.95.228.104:22122
+#  tracker-list: localhost:22122
   ##测试环境
-  tracker-list: 47.94.251.90:22122
+  tracker-list: localhost:22122
