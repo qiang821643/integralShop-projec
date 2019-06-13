@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.integral.mapper.IntegralMemberCcsMapper">
+
+    <select id="findByParam" resultType="com.integral.model.IntegralMemberCcs"
+            parameterType="com.integral.model.IntegralMemberCcs">
+        select * from INTEGRAL_MEMBER_CCS
+        <where>
+             1=1
+            <if test="id!=null and id!=''">
+               and id=#{id}
+            </if>
+            <if test="status!=null and status!=''">
+                and status=#{status}
+            </if>
+            <if test="z_member_id!=null and z_member_id!=''">
+                and z_member_id=#{z_member_id}
+            </if>
+        </where>
+    </select>
+
+    <update id="update" parameterType="com.integral.model.IntegralMemberCcs">
+        update INTEGRAL_MEMBER_CCS
+        <set>
+            <if test="enable_points!=null and enable_points!=''">
+                enable_points = #{enable_points},
+            </if>
+            <if test="count_points!=null and count_points!=''">
+                count_points=#{count_points}
+            </if>
+        </set>
+
+          where  id=#{id}
+
+    </update>
+
+    <insert id="insert" parameterType="com.integral.model.IntegralMemberCcs">
+        insert into INTEGRAL_MEMBER_CCS(ID,Z_MEMBER_ID,COUNT_POINTS,ENABLE_POINTS,CREATE_DATE,STATUS)
+        values(#{id,jdbcType=DECIMAL},#{z_member_id,jdbcType=VARCHAR},#{count_points,jdbcType=DECIMAL},
+        #{enable_points,jdbcType=DECIMAL},#{create_date},#{status})
+    </insert>
+
+    <select id="queryZmemberTable" parameterType="String" resultType="map">
+        select * from z_member where MNUMBER=#{member}
+
+    </select>
+
+    <select id="findMemberCcs" parameterType="Integer" resultType="com.integral.model.IntegralMemberCcs">
+        select id,z_member_id,count_points,enable_points,create_date,status
+        from INTEGRAL_MEMBER_CCS where id=#{id} and status=0
+    </select>
+
+    <update id="minusCoin" parameterType="map">
+        update z_member set STOCKRIGHT=#{newCoin} where  MNUMBER=#{member}
+    </update>
+
+    <select id="findOne" parameterType="com.integral.model.IntegralMemberCcs"
+            resultType="com.integral.model.IntegralMemberCcs">
+
+        select * from INTEGRAL_MEMBER_CCS
+        <where>
+            1=1
+            <if test="id!=null and id!=''">
+                and id=#{id}
+            </if>
+            <if test="status!=null and status!=''">
+                and status=#{status}
+            </if>
+            <if test="z_member_id!=null and z_member_id!=''">
+                and z_member_id=#{z_member_id}
+            </if>
+        </where>
+    </select>
+</mapper>

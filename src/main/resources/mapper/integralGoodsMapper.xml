@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.integral.mapper.IntegralGoodsMapper">
+
+    <select id="findGoods" parameterType="map" resultType="com.integral.model.AppGoodsPage">
+        select * from INTEGRAL_GOODS
+        <where>
+            1=1
+            <if test="goodsName!=null and goodsName!=''">
+                and goods_name like concat('%',#{goodsName},'%')
+            </if>
+            <if test="startDate!=null and goodsName!=''">
+                and to_date(create_date,'yyyy-MM-dd') <![CDATA[>=]]>#{startDate}
+            </if>
+            <if test="endDate!=null and endDate!=''">
+                and to_date(create_date,'yyyy-MM-dd') <![CDATA[<=]]> #{endDate}
+            </if>
+            <if test="status!=null and status!=''">
+                and status = #{status}
+            </if>
+            <if test="id!=null and id!=''">
+                and id = #{id}
+            </if>
+        </where>
+    </select>
+
+    <select id="findOne" parameterType="com.integral.model.IntegralGoods" resultType="com.integral.model.IntegralGoods">
+        select * from INTEGRAL_GOODS
+        <where>
+            1=1
+            <if test="status!=null and status!=''">
+                and status = #{status}
+            </if>
+            <if test="id!=null and id!=''">
+                and id = #{id}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insert" parameterType="com.integral.model.IntegralGoods">
+        insert
+        into integral_goods(id,goods_name,price,integral_supplier_id,count,pay_points,remark,
+        integral_file_id,status,create_date,update_date,TYPE_NAME,POSTAGE)
+        values
+        (#{id,jdbcType=DECIMAL},#{goods_name,jdbcType=VARCHAR},#{price,jdbcType=VARCHAR},#{integral_supplier_id,jdbcType=DECIMAL}
+        ,#{count,jdbcType=DECIMAL},#{pay_points,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},
+        #{integral_file_id,jdbcType=DECIMAL},#{status,jdbcType=VARCHAR},#{create_date},#{update_date},
+        #{type_name,jdbcType=VARCHAR},#{postage,jdbcType=VARCHAR})
+    </insert>
+
+    <update id="update" parameterType="com.integral.model.IntegralGoods">
+        update INTEGRAL_GOODS
+        <set>
+            <if test="count!=null and count!=''">
+                count = #{count}
+            </if>
+            <if test="pay_points!=null and pay_points!=;;">
+                pay_points= #{pay_points}
+            </if>
+            <if test="status!=null and status!=''">
+                status = #{status}
+            </if>
+        </set>
+        <where>
+            id= #{id}
+        </where>
+    </update>
+
+    <delete id="delete" parameterType="Integer">
+
+        delete from INTEGRAL_GOODS where id=#{id}
+    </delete>
+
+    <select id="goodsSpec" parameterType="Integer" resultType="list">
+        select s.specifications_name,sg.goods_count,sv.value
+        from Integral_Specifications_Goods sg,Integral_Specifications s,Integral_Specifications_Value sv
+        where sg.SPECIFICATIONS_VALUE_ID=s.id
+        and s.id =sv.integral_specifications_id
+        and sg.integral_goods_id=#{goodsId}
+    </select>
+
+    <select id="getGoodsType" resultType="map">
+        select  type_name, picture_path from integral_goods_type
+    </select>
+</mapper>

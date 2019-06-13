@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.integral.mapper.IntegralSupplierMapper">
+
+    <select id="queryByUserName" parameterType="String" resultType="com.integral.model.IntegralSupplier">
+        select * from INTEGRAL_SUPPLIER
+        <where>
+            <if test="userName!=null and userName!=''">
+                user_name=#{userName}
+            </if>
+        </where>
+    </select>
+
+    <update id="updatePwdByUserName" parameterType="String">
+        update INTEGRAL_SUPPLIER set pwd=#{pwd} where user_name=#{userName}
+    </update>
+
+    <insert id="insertSuppiler" parameterType="com.integral.model.IntegralSupplier">
+
+        insert into integral_supplier(ID,USER_NAME,PWD,SUPPLIER_NAME,POINTS_COUNT,ADDRESS,PERSON_LIABLE,PHONE,CREATE_DATE,STATUS,EMAIL)
+        values (SEQ_SUPPLIER.nextval,#{user_name,jdbcType=VARCHAR},#{pwd,jdbcType=VARCHAR},#{supplier_name,jdbcType=VARCHAR},
+        #{points_count,jdbcType=VARCHAR},#{address,jdbcType=VARCHAR},#{person_liable},#{phone,jdbcType=VARCHAR},
+        #{create_date},#{status,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR})
+    </insert>
+
+    <update id="update" parameterType="com.integral.model.IntegralSupplier">
+        update INTEGRAL_SUPPLIER
+        <set>
+            <if test="points_count!=null and points_count!=''">
+                points_count=#{points_count}
+            </if>
+        </set>
+    </update>
+
+    <select id="findByParam" parameterType="com.integral.model.IntegralSupplier"
+            resultType="com.integral.model.IntegralSupplier">
+        select * from INTEGRAL_SUPPLIER
+        <where>
+            1=1
+            <if test="id!=null and id!=''">
+                id=#{id}
+            </if>
+            
+        </where>
+    </select>
+
+    <select id="findOne" parameterType="com.integral.model.IntegralSupplier"
+            resultType="com.integral.model.IntegralSupplier">
+        select * from INTEGRAL_SUPPLIER
+        <where>
+            1=1
+            <if test="id!=null and id!=''">
+               and id=#{id}
+            </if>
+            <if test="user_name!=null and user_name!=''">
+              and  user_name=#{user_name}
+            </if>
+        </where>
+    </select>
+</mapper>

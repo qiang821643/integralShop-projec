@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.integral.mapper.IntegralSpecificationsMapper">
+
+    <insert id="insert" parameterType="com.integral.model.IntegralSpecifications">
+        insert into Integral_Specifications(ID,SPECIFICATIONS_NAME,GOODS_TYPE,GOODS_LEVEL)
+        values(SEQ_INTEGRAL_Specifications.Nextval,#{specifications_name,jdbcType=VARCHAR},
+        #{goods_type,jdbcType=DECIMAL},#{goods_level,jdbcType=DECIMAL})
+    </insert>
+
+    <delete id="delete" parameterType="Integer">
+        delete from Integral_Specifications where id=#{id}
+    </delete>
+
+    <delete id="deleteBatch" parameterType="list">
+
+        delete from Integral_Specifications where id in
+        <foreach item="itens" index="index"  collection="list" open="(" separator="," close=")">
+            #{items}
+        </foreach>
+    </delete>
+    
+    <select id="findByParam" parameterType="com.integral.model.IntegralSpecifications"
+            resultType="com.integral.model.IntegralSpecifications">
+        select * from Integral_Specifications
+        <where>
+              1=1
+            <if test="id!=null and id!=''">
+                and id=#{id}
+            </if>
+        </where>
+    </select>
+</mapper>

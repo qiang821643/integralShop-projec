@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.integral.mapper.IntegralHistoryMapper">
+
+    <select id="insert" resultType="com.integral.model.IntegralHistory">
+        insert into integral_history(ID,POINTS,ACTION,INTEGRAL_MEMBER_CCS_ID,CREATE_DATE,INTEGRAL_ITEM_ID)
+        values(SEQ_INTEGRAL_HISTORY.NEXTVAL,#{points,jdbcType=VARCHAR},#{action,jdbcType=VARCHAR},
+        #{integral_member_ccs_id,jdbcType=DECIMAL},#{create_date},#{integral_item_id,jdbcType=DECIMAL})
+    </select>
+
+
+
+</mapper>
