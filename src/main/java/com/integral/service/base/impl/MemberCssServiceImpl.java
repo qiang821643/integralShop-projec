@@ -54,14 +54,18 @@ public class MemberCssServiceImpl implements MemberCssService {
         if(zMember==null || zMember.isEmpty()){
             return Result.error(Result.build(),"系统没有查询该账户","");
         }
-        String zMemberId = member;
+        String zMemberId = zMember.get("MNUMBER").toString();
         IntegralMemberCcs memberCcs = new IntegralMemberCcs();
         memberCcs.setZ_member_id(zMemberId);
         memberCcs.setStatus(Constant.ENABLE);
         IntegralMemberCcs memberCcsOne = memberCcsMapper.findOne(memberCcs);
-        //List<IntegralMemberCcs> memberCcsList = memberCcsMapper.findByParam(memberCcs);
+        Map<String,Object> idMap = new HashMap<>();
+
         if (memberCcsOne!=null) {
-            return Result.ok(Result.build(), "", memberCcsOne.getId());
+            String jwt = JwtTokenUtil.generateToken(zMember.get("MACCOUNT").toString(),"admin",memberCcsOne.getId());
+            idMap.put("jwt",jwt);
+            idMap.put("id",memberCcsOne.getId());
+            return Result.ok(Result.build(), "", idMap);
         }
         Integer id = memberCcsMapper.queryQUE();
         memberCcs.setId(id);
@@ -73,10 +77,9 @@ public class MemberCssServiceImpl implements MemberCssService {
         try {
             log.info("同步账号是{}",member);
             memberCcsMapper.insert(memberCcs);
-            Map<String,Object> idMap = new HashMap<>();
+
             idMap.put("id",id);
-            String jwt = JwtTokenUtil.generateToken("","",id);
-            idMap.put("jwt",jwt);
+
             return Result.ok(Result.build(), "", idMap);
         } catch (Exception e) {
             log.error("com.integral.service.base.impl.MemberCssServiceImpl.synUserName", e.getMessage());

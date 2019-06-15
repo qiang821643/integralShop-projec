@@ -132,6 +132,14 @@
 			<artifactId>jjwt</artifactId>
 			<version>0.9.0</version>
 		</dependency>
+		<!--谷歌集合工具包-->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>27.1-jre</version>
+			<classifier>sources</classifier>
+			<type>java-source</type>
+		</dependency>
 	</dependencies>
 
 	<build>

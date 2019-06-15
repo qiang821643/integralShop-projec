@@ -1,12 +1,17 @@
 package com.integral.config;
 
+
+import com.google.common.collect.Lists;
 import org.springframework.context.annotation.Bean;
+import com.integral.interceptor.PhoneInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import java.util.List;
 /**
  * 解决跨域问题
  * @author: create QiangShW
@@ -16,6 +21,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  **/
 @Configuration
 public class WebMvcConfiguration implements WebMvcConfigurer {
+
+    @Autowired
+    private PhoneInterceptor phoneInterceptor;
+
+    private final List<String> url = Lists.newArrayList("/goods/*");
 
     @Bean
     public CorsFilter corsFilter() {
@@ -31,6 +41,12 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
         corsConfiguration.addAllowedMethod("*");
         urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
         return new CorsFilter(urlBasedCorsConfigurationSource);
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+
+        registry.addInterceptor(phoneInterceptor).addPathPatterns(url);
     }
 
 }
