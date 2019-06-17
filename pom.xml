@@ -22,7 +22,21 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
+			<!--spring boot 2.0默认使用连接池是lettuce,这里采用jedis需要排除lettuce的jar-->
+			<exclusions>
+				<exclusion>
+					<groupId>redis.clients</groupId>
+					<artifactId>jedis</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>io.lettuce</groupId>
+					<artifactId>lettuce-core</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
+
+
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-oauth2-client</artifactId>
@@ -76,7 +90,18 @@
 			<version>1.0.28</version>
 			<optional>true</optional>
 		</dependency>
-
+		<!--redis客户端-->
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>2.9.1</version>
+		</dependency>
+		<!-- 必须加上，jedis依赖此  -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-pool2</artifactId>
+			<version>2.4.3</version>
+		</dependency>
 		<!--appach包-->
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -86,7 +111,7 @@
 		<dependency>
 			<groupId>apache-lang</groupId>
 			<artifactId>commons-lang</artifactId>
-			<version>2.1</version>
+            <version>2.0</version>
 		</dependency>
 		<!--日志-->
 		<dependency>
@@ -94,16 +119,7 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.13</version>
 		</dependency>
-		<!--<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-slf4j-impl</artifactId>
-			<version>2.4.1</version>
-		</dependency>-->
-		<!--<dependency>
-			<groupId>apache-log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.15</version>
-		</dependency>-->
+
 
 		<dependency>
 			<groupId>com.alibaba</groupId>

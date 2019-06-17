@@ -2,6 +2,7 @@ package com.integral.controller;
 
 import com.integral.service.MenuService;
 import com.integral.util.FileUtils;
+import com.integral.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,6 +27,9 @@ public class MenuContoller {
     @Autowired
     private FileUtils fileUtils;
 
+    @Autowired
+    private RedisUtil redisUtil;
+
     @GetMapping("/test1")
     public List<Map<String, Object>> test() {
 
@@ -41,5 +45,10 @@ public class MenuContoller {
     public String upload(@RequestParam(name = "file")  MultipartFile file)throws  IOException{
 
         return fileUtils.upload(file);
+    }
+
+    @GetMapping("/redis")
+    public void redis(){
+        redisUtil.insert();
     }
 }

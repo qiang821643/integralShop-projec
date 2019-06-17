@@ -1,6 +1,6 @@
 package com.integral.util;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

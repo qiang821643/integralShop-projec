@@ -3,7 +3,7 @@ package com.integral.model;
 
 import com.integral.constant.Constant;
 import lombok.Data;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 

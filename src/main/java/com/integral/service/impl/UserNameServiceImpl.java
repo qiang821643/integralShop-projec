@@ -6,7 +6,7 @@ import com.integral.service.UserNameService;
 import com.integral.service.base.SupplierService;
 import com.integral.util.MD5;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.integral.model.IntegralSupplier;
 import org.springframework.stereotype.Service;

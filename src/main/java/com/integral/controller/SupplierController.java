@@ -6,7 +6,7 @@ import com.integral.model.Result;
 import com.integral.service.UserNameService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Contact;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.authority.AuthorityUtils;
