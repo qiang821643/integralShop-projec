@@ -1,9 +1,11 @@
 package com.integral.security;
 
-import com.nimbusds.jwt.JWT;
+
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.impl.DefaultClaims;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.Date;
 
@@ -19,33 +21,15 @@ public class JwtTokenUtil {
 
     private final String key = "integralShop";
 
-    /*static {
-        try{
-            KeyStore keyStore = KeyStore.getInstance("JKS");
-            keyStore.load(inputStream, "123456".toCharArray());
-            privateKey =(PrivateKey) keyStore.getKey("integralShop","123456".toCharArray());//jwt 为 命令生成整数文件时的别名
-            publicKey =  keyStore.getCertificate("integralShop").getPublicKey();
 
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }*/
-
-    public static String generateToken(String subject, String salt,Integer id) {
-//        return Jwts.builder()
-//                .setClaims(null)
-//                .setSubject(subject)
-//                .setExpiration(new Date(System.currentTimeMillis() + expirationSeconds * 1000))
-//                .signWith(SignatureAlgorithm.HS512, "integralShop") // 不使用公钥私钥
-//                .signWith(SignatureAlgorithm.RS256, "integralShop")
-//                .compact();
+    public static String generateToken(String subject, String salt, Integer id) {
 
 
         long nowMillis = System.currentTimeMillis();
         System.out.println(nowMillis);
         Date nowData = new Date(nowMillis);
-        Date nowData1 = new Date(System.currentTimeMillis()+259200l*1000);
-        Date nowData2 = new Date(System.currentTimeMillis()-259200l*1000);
+        Date nowData1 = new Date(System.currentTimeMillis() + 259200l * 1000);
+        Date nowData2 = new Date(System.currentTimeMillis() - 259200l * 1000);
         Claims claims = new DefaultClaims();
         claims.setId(id.toString());
         claims.setSubject(subject);
@@ -59,37 +43,37 @@ public class JwtTokenUtil {
                 .signWith(SignatureAlgorithm.HS256, "integralShop");
 
 
-        log.info("nowData:"+nowData+",nowData1:"+nowData1);
-        return builder.compact();
+        log.info("nowData:" + nowData + ",nowData1:" + nowData1);
+        String jwt = builder.compact();
+        RedisTemplate redisTemplate = new RedisTemplate();
+        Object value = redisTemplate.opsForValue().get(subject);
+        if (value != null) {
+            redisTemplate.delete(subject);
+            redisTemplate.opsForValue().append(subject, jwt);
+        } else {
+            redisTemplate.opsForValue().append(subject, jwt);
+        }
+        return jwt;
     }
 
     /**
      * 解析令牌
+     *
      * @param token
      * @return
      */
-    public static Claims parseToken(String token) {
-//        String subject = null;
-//        try {
-//            Claims claims = Jwts.parser()
-//                   .setSigningKey(salt) // 不使用公钥私钥
-//                    .setSigningKey("integralShop")
-//                    .parseClaimsJws(token)
-//                    .getBody();
-//            subject = claims.getSubject();
-//        } catch (Exception e) {
-//        }
-//        return subject;
-        log.info(token);
-        return  Jwts.parser()
-                .setSigningKey("integralShop")
-               .parseClaimsJws(token)
-                .getBody();
-
-
+    public static Claims parseToken(String token, String userName) {
+        RedisTemplate redisTemplate = new RedisTemplate();
+        Object value = redisTemplate.opsForValue().get(userName);
+        if(StringUtils.equals(token,String.valueOf(value))){
+            return Jwts.parser()
+                    .setSigningKey("integralShop")
+                    .parseClaimsJws(token)
+                    .getBody();
+        }else {
+            return null;
+        }
     }
-
-
 
 
 }
