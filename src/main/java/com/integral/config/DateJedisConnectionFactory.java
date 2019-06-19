@@ -68,7 +68,6 @@ public class DateJedisConnectionFactory {
     @Bean
     public JedisPoolConfig  jedisPool(){
         log.info("---------------------jedisPool配置初始化-----------------------------");
-        log.info("---------------maxWaitMillis->{}",maxWaitMillis);
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
         jedisPoolConfig.setMaxIdle(maxIdle);
         jedisPoolConfig.setMaxWaitMillis(maxWaitMillis);

@@ -49,6 +49,6 @@ public class MenuContoller {
 
     @GetMapping("/redis")
     public void redis(){
-        redisUtil.insert();
+        //redisUtil.insert();
     }
 }
