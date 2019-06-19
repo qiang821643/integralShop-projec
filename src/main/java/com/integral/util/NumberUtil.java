@@ -11,15 +11,20 @@ import java.util.Random;
  **/
 public class NumberUtil {
 
-
+    /**
+     * 用来生成订单编码
+     * 随机数+时间+id
+     * @param id
+     * @return
+     */
     public static String createCode(String id) {
 
         String time = TimeUtil.foramt(TimeUtil.YYYYMMMDD, new Date());
         Random random = new Random();
-        String resulr = "";
+        String result = "";
         for (int i=0;i<3;i++){
-            resulr += random.nextInt(10);
+            result += random.nextInt(10);
         }
-        return resulr+time+id;
+        return result+time+id;
     }
 }
