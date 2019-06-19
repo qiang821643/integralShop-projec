@@ -5,7 +5,9 @@ import io.jsonwebtoken.*;
 import io.jsonwebtoken.impl.DefaultClaims;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
@@ -17,12 +19,16 @@ import java.util.Date;
  * @date:2019/6/3
  **/
 @Slf4j
+@Component
 public class JwtTokenUtil {
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     private final String key = "integralShop";
 
 
-    public static String generateToken(String subject, String salt, Integer id) {
+    public String generateToken(String subject, String salt, Integer id) {
 
 
         long nowMillis = System.currentTimeMillis();
@@ -45,7 +51,7 @@ public class JwtTokenUtil {
 
         log.info("nowData:" + nowData + ",nowData1:" + nowData1);
         String jwt = builder.compact();
-        RedisTemplate redisTemplate = new RedisTemplate();
+
         Object value = redisTemplate.opsForValue().get(subject);
         if (value != null) {
             redisTemplate.delete(subject);
@@ -62,9 +68,9 @@ public class JwtTokenUtil {
      * @param token
      * @return
      */
-    public static Claims parseToken(String token, String userName) {
-        RedisTemplate redisTemplate = new RedisTemplate();
-        Object value = redisTemplate.opsForValue().get(userName);
+    public Claims parseToken(String token) {
+
+        Object value = redisTemplate.opsForValue().get(token);
         if(StringUtils.equals(token,String.valueOf(value))){
             return Jwts.parser()
                     .setSigningKey("integralShop")

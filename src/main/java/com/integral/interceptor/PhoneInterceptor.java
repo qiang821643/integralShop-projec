@@ -26,18 +26,21 @@ public class PhoneInterceptor implements HandlerInterceptor {
 
     @Autowired
     private IntegralMemberCcsMapper memberCcsMapper;
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
 
         String authorization = request.getHeader("Authorization");
+
         //String hender = request.getQueryString();
 
         if(StringUtils.isNotBlank(authorization) && authorization.startsWith("Bearerey:")){
             log.info(authorization);
             final String token = authorization.substring("Bearerey:".length());
             log.info(token);
-            Claims claims = JwtTokenUtil.parseToken(token);
+            Claims claims = jwtTokenUtil.parseToken(token);
             IntegralMemberCcs param = new IntegralMemberCcs();
             param.setId(Integer.valueOf(claims.getId()));
             IntegralMemberCcs memberCcs = memberCcsMapper.findOne(param);

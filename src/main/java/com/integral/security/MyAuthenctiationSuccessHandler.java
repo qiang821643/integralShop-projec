@@ -20,7 +20,8 @@ public class MyAuthenctiationSuccessHandler implements AuthenticationSuccessHand
 
     @Autowired
     private ObjectMapper objectMapper;
-
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         log.info("登录成功");
@@ -31,7 +32,7 @@ public class MyAuthenctiationSuccessHandler implements AuthenticationSuccessHand
         response.setStatus(200);
         response.setContentType("application/json;charset=UTF-8");
         SelfUserDetails userDetails = (SelfUserDetails) authentication.getPrincipal();
-        String jwtToken = JwtTokenUtil.generateToken(userDetails.getUsername(), "admin",userDetails.getId());
+        String jwtToken = jwtTokenUtil.generateToken(userDetails.getUsername(), "admin",userDetails.getId());
         res.put("jwtToke",jwtToken);
         response.getWriter().append(res.toString());
     }

@@ -28,7 +28,8 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
     @Autowired
     private  SupplierDetails supplierDetails;
-
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
@@ -39,7 +40,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         if(authention != null && authention.startsWith("Authorization=Bearerey:")){
             final String authToken = authention.substring("Authorization=Bearerey:".length());
             log.info("token:{}",authToken);
-            Claims claims = JwtTokenUtil.parseToken(authToken);
+            Claims claims = jwtTokenUtil.parseToken(authToken);
             if(claims != null && SecurityContextHolder.getContext().getAuthentication()== null){
                 UserDetails userDetails = supplierDetails.loadUserByUsername(claims.getSubject());
                 if(userDetails!=null){

@@ -7,6 +7,7 @@ import com.integral.service.base.SupplierService;
 import com.integral.util.MD5;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.integral.model.IntegralSupplier;
 import org.springframework.stereotype.Service;
@@ -66,7 +67,7 @@ public class UserNameServiceImpl implements UserNameService {
     /**
      * 注册
      *
-     * @param integralSupplier
+     * @param registerEnttity
      * @return
      */
     @Override
@@ -74,15 +75,16 @@ public class UserNameServiceImpl implements UserNameService {
         IntegralSupplier supplier = supplierService.queryByUserName(registerEnttity.getUser_name());
         if (registerEnttity != null && supplier==null) {
             supplier = new IntegralSupplier();
-            supplier.setUser_name(registerEnttity.getUser_name());
+            BeanUtils.copyProperties(supplier,registerEnttity);
+//            supplier.setUser_name(registerEnttity.getUser_name());
+//            supplier.setPwd(registerEnttity.getPwd());
+//            supplier.setPhone(registerEnttity.getPhone());
+//            supplier.setPerson_liable(registerEnttity.getPerson_liable());
+//            supplier.setAddress(registerEnttity.getAddress());
+//            supplier.setEmail(registerEnttity.getEmail());
             supplier.setPoints_count("0");
-            supplier.setPwd(registerEnttity.getPwd());
-            supplier.setPhone(registerEnttity.getPhone());
-            supplier.setPerson_liable(registerEnttity.getPerson_liable());
-            supplier.setAddress(registerEnttity.getAddress());
             supplier.setCreate_date(new Date());
             supplier.setStatus(Constant.ENABLE);
-            supplier.setEmail(registerEnttity.getEmail());
             log.info(supplier.toString());
             supplierService.inserSupplier(supplier);
             return Result.ok(Result.build(), "", "");

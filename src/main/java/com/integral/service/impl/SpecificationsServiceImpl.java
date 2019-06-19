@@ -9,6 +9,7 @@ import com.integral.model.IntegralSpecificationsValue;
 import com.integral.model.Result;
 import com.integral.service.SpecificationsService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,9 +40,10 @@ public class SpecificationsServiceImpl implements SpecificationsService {
     public Result addSpec(AddSepci addSepci) {
         if(addSepci!=null) {
             IntegralSpecifications specifications = new IntegralSpecifications();
-            specifications.setSpecifications_name(addSepci.getSpeciName());
-            specifications.setGoods_level(addSepci.getLevel());
-            specifications.setGoods_type(addSepci.getType());
+            BeanUtils.copyProperties(specifications,addSepci);
+//            specifications.setSpecifications_name(addSepci.getSpeciName());
+//            specifications.setGoods_level(addSepci.getLevel());
+//            specifications.setGoods_type(addSepci.getType());
             Integer id = specificationsMapper.querySEQ();
             try {
                 specificationsMapper.insert(specifications);

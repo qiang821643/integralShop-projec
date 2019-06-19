@@ -13,6 +13,7 @@ import com.integral.util.TimeUtil;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -109,18 +110,20 @@ public class DoGoodServiceImpl implements DoGoodService {
             });
 
             IntegralGoods goods = new IntegralGoods();
-            goods.setCount(goodsShelvesEntity.getCount());
-            goods.setGoods_name(goodsShelvesEntity.getGood_name());
-            goods.setPay_points(goodsShelvesEntity.getPay_point());
-            goods.setPrice(goodsShelvesEntity.getPrice());
+            BeanUtils.copyProperties(goods,goodsShelvesEntity);
+//            goods.setCount(goodsShelvesEntity.getCount());
+//            goods.setGoods_name(goodsShelvesEntity.getGood_name());
+//            goods.setPay_points(goodsShelvesEntity.getPay_point());
+//            goods.setPrice(goodsShelvesEntity.getPrice());
+//            goods.setRemark(goodsShelvesEntity.getRemark());
+//            goods.setIntegral_supplier_id(goodsShelvesEntity.getIntegral_supplier_id());
+//            goods.setType_name(goodsShelvesEntity.getType_name());
+//            goods.setPostage(goodsShelvesEntity.getPostage());
             goods.setCreate_date(new Date());
             goods.setUpdate_date(new Date());
-            goods.setRemark(goodsShelvesEntity.getRemark());
             goods.setStatus(Constant.ENABLE);
-            goods.setIntegral_supplier_id(goodsShelvesEntity.getIntegral_supplier_id());
             goods.setId(goodsId);
-            goods.setType_name(goodsShelvesEntity.getType_name());
-            goods.setPostage(goodsShelvesEntity.getPostage());
+
             integralGoodsMapper.insert(goods);
             return Result.ok(Result.build(), "", "");
         } catch (
@@ -137,6 +140,7 @@ public class DoGoodServiceImpl implements DoGoodService {
      * @param goodsShelvesEntity
      * @return
      */
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public Result editorGoods(GoodsShelvesEntity goodsShelvesEntity) {
         /*if (goodsShelvesEntity != null && goodsShelvesEntity.getIntegralGoods() != null) {
@@ -158,6 +162,7 @@ public class DoGoodServiceImpl implements DoGoodService {
      * @param id
      * @return
      */
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public Result deleteGoods(Integer id) {
        /* Map<String, Object> param = new HashMap<>();
