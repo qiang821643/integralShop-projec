@@ -57,30 +57,30 @@ public class SecurityConfig extends  WebSecurityConfigurerAdapter {
 
 
 
-           http.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //使用JWT关闭token
-                    .and()
-                    .httpBasic().authenticationEntryPoint(myAuthencationEntryPoint)
-                    .and()
-                    .authorizeRequests()
-                    .antMatchers("/login","/goods/*","/member/*","/menu/*")
-                    .permitAll()
-                    //.anyRequest()
-                    //.authenticated()
-                    .and()
-                    .formLogin()
-                    //.loginPage("http://47.94.251.90/frontend-shop/dist/#/login")
-                    .successHandler(myAuthenctiationSuccessHandler)
-                    .failureHandler(myAuthenctiationFailureHandler)
-                    .permitAll()
-                   .and().authorizeRequests().anyRequest().authenticated();
-
-            http.exceptionHandling().accessDeniedHandler(accessDeniedHandler);
-            http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
-
-
+//           http.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //使用JWT关闭token
+//                    .and()
+//                    .httpBasic().authenticationEntryPoint(myAuthencationEntryPoint)
+//                    .and()
+//                    .authorizeRequests()
+//                    .antMatchers("/login","/goods/*","/member/*","/menu/*","/druid/*")
+//                    .permitAll()
+//                    //.anyRequest()
+//                    //.authenticated()
+//                    .and()
+//                    .formLogin()
+//                    //.loginPage("http://47.94.251.90/frontend-shop/dist/#/login")
+//                    .successHandler(myAuthenctiationSuccessHandler)
+//                    .failureHandler(myAuthenctiationFailureHandler)
+//                    .permitAll()
+//                   .and().authorizeRequests().anyRequest().authenticated();
+//
+//            http.exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+//            http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
 
-        //http.authorizeRequests().antMatchers("/").permitAll().and().csrf().disable();
+
+
+        http.authorizeRequests().antMatchers("/").permitAll().and().csrf().disable();
 
 
 
