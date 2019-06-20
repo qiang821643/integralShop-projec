@@ -20,7 +20,7 @@
 		|-com.integral.controller
   		|             |
  	        |             |-com.integral.controller.pcController 
-                |             |
+             |             |
   	        |             |-com.integral.controller.terminalController 
  	        |
   		|-com.integral.exception/
@@ -41,7 +41,7 @@
  	        |              |
   		|              |-com.integral.service.impl
  	        |
-                |-com.integral.util
+               |-com.integral.util
   		|
   		|-IntegralApplication.java
 
