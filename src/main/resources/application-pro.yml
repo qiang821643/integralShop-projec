@@ -68,3 +68,7 @@ fdfs:
   connect-timeout: 600
   ##测试环境
   tracker-list: localhost:22122
+
+
+##ngnix地址
+file-url: http://localhost:8502/
