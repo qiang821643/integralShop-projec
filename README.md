@@ -10,6 +10,38 @@
 <li> http://localhost:8089/druid/login.html</li>
 </ol>
 <div>
-  com.integral_
+  com.integral
+  |
+  |____________config
+  |
+  |____________constant
+  |
+  |____________controller
+  |             |
+  |             |__________pcController
+  |             |
+  |             |__________terminalController
+  |
+  |_____________exception
+  |
+  |_____________nterceptior
+  |
+  |_____________mapper
+  |
+  |_____________model
+  |
+  |_____________security
+  |
+  |_____________service
+  |              |
+  |              |__________base
+  |              |           |
+  |              |           |_______impl
+  |              |
+  |              |__________impl
+  |
+  |_____________util
+  |
+  |______________________________________IntegralApplication.java
 </div>
 ##项目结构后期往上补
