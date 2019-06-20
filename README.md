@@ -12,19 +12,19 @@
 
   com.integral
   |
-  |____________config
+  |____________config \n
   |
-  |____________constant
+  |____________constant \n
   |
-  |____________controller
+  |____________controller \n
   |             |
-  |             |__________pcController
+  |             |__________pcController \n
   |             |
-  |             |__________terminalController
+  |             |__________terminalController \n
   |
-  |_____________exception
+  |_____________exception \n
   |
-  |_____________nterceptior
+  |_____________nterceptior \n
   |
   |_____________mapper
   |
