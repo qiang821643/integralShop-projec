@@ -10,7 +10,7 @@
 <li> http://localhost:8089/druid/login.html</li>
 </ol>
 
-      com.integral
+              com.integral
   		|
   		|-com.integral.config
   		|
@@ -18,29 +18,29 @@
   		|
 		  |-com.integral.controller
   		|             |
- 	    |             |-com.integral.controller.pcController 
-      |             |
-  	  |             |-com.integral.controller.terminalController 
- 	    |
-  		|-com.integral.exception 
-      | 
-  		|-com.integral.nterceptior 
-   		|
+ 	     |             |-com.integral.controller.pcController 
+          |             |
+  	    |             |-com.integral.controller.terminalController 
+ 	     |
+  		|-com.integral.exception/
+          |
+  		|-com.integral.interceptior 
+      	|
   		|-com.integral.mapper
   		|
   		|-com.integral.model
   		|
   		|-com.integral.security
- 		  |
+ 	 	|
   		|-com.integral.service
   		|              
   		|              |-com.integral.service.base
   		|              |           |
 	  	|              |           |-com.integral.service.base.impl
- 	    |              |
+ 	     |              |
   		|              |-com.integral.service.impl
- 	    |
-      |-com.integral.util
+ 	     |
+          |-com.integral.util
   		|
   		|-IntegralApplication.java
 
