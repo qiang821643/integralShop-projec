@@ -10,7 +10,8 @@
 <li> http://localhost:8089/druid/login.html</li>
 </ol>
 
-              com.integral
+ <div>
+	        com.integral
   		|
   		|-com.integral.config
   		|
@@ -43,5 +44,5 @@
           |-com.integral.util
   		|
   		|-IntegralApplication.java
-
+</div>
 ##项目结构后期往上补
