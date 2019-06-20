@@ -56,7 +56,7 @@
             <if test="count!=null and count!=''">
                 count = #{count}
             </if>
-            <if test="pay_points!=null and pay_points!=;;">
+            <if test="pay_points!=null and pay_points!=''">
                 pay_points= #{pay_points}
             </if>
             <if test="status!=null and status!=''">

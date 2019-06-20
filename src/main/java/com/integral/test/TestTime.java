@@ -1,6 +1,9 @@
 package com.integral.test;
 
+import com.integral.model.IntegralGoods;
+import com.integral.model.IntegralSupplier;
 import com.integral.util.TimeUtil;
+import org.apache.commons.beanutils.BeanUtils;
 
 import java.util.Date;
 
@@ -13,9 +16,19 @@ import java.util.Date;
 public class TestTime {
 
     public static void main(String[] args) {
-       String c = "";
-       int a = Integer.valueOf(c);
-       System.out.println(a);
+
+        IntegralGoods goods = new IntegralGoods();
+        goods.setId(1);
+        goods.setStatus("01");
+        goods.setCount("50");
+        goods.setRemark("fds");
+        IntegralGoodsCss supplier = new IntegralGoodsCss();
+        try {
+            BeanUtils.copyProperties(supplier, goods);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        System.out.println(supplier);
     }
 
 

@@ -4,6 +4,9 @@ package com.integral.config;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.google.common.collect.Lists;
+import io.swagger.models.auth.In;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -20,6 +23,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * 解决跨域问题
@@ -32,11 +36,13 @@ import java.util.List;
 @Configuration
 public class WebMvcConfiguration implements WebMvcConfigurer {
 
+
+
     @Autowired
     private PhoneInterceptor phoneInterceptor;
 
 
-    private final List<String> url = Lists.newArrayList("/goods/*");
+    private final List<String> url = Lists.newArrayList("/goods/shelves");
 
     @Bean
     public CorsFilter corsFilter() {
@@ -62,68 +68,72 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
     /**
      * 德鲁伊servlet
-     * @return
-     * http://localhost:8088/druid2/index.html
+     *
+     * @return http://localhost:8088/druid2/index.html
      */
     @Bean
-    public ServletRegistrationBean druidServletRegist(){
-        ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new StatViewServlet(),"/druid2/*");
-        servletRegistrationBean.addInitParameter("allow","127.0.0.1");
+    public ServletRegistrationBean druidServletRegist() {
+        ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
+        servletRegistrationBean.addInitParameter("allow", "127.0.0.1");
 
         //IP黑名单 (存在共同时，deny优先于allow) : 如果满足deny的话提示:Sorry, you are not permitted to view this page.
 
-        servletRegistrationBean.addInitParameter("deny","192.168.1.73");
+        servletRegistrationBean.addInitParameter("deny", "192.168.1.73");
 
         //登录查看信息的账号密码.
 
-        servletRegistrationBean.addInitParameter("loginUsername","admin2");
+        servletRegistrationBean.addInitParameter("loginUsername", "a");
 
-        servletRegistrationBean.addInitParameter("loginPassword","123456");
+        servletRegistrationBean.addInitParameter("loginPassword", "123");
 
         //是否能够重置数据.
 
-        servletRegistrationBean.addInitParameter("resetEnable","false");
+        servletRegistrationBean.addInitParameter("resetEnable", "false");
         return servletRegistrationBean;
 
     }
 
     /**
-     *德鲁伊过滤器
+     * 德鲁伊过滤器
      */
     @Bean
     public void druidFilter() {
         FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-        registrationBean.addInitParameter("exclusions","*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid2/*");
+        registrationBean.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid2/*");
         registrationBean.addUrlPatterns("/*");
     }
 
     @Bean
-    @Primary
+    @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource druidDataSource() throws SQLException {
-        DruidDataSource dataSource = new DruidDataSource();
-        dataSource.setUsername("kaifa");
-        dataSource.setPassword("zsl.com");
-        dataSource.setDriverClassName("oracle.jdbc.OracleDriver");
-        dataSource.setUrl("jdbc:oracle:thin:@localhost:ORCL");
-        dataSource.setInitialSize(10);
-        dataSource.setMinIdle(5);
-        dataSource.setMaxActive(20);
-        dataSource.setMaxWait(6000);
-        /*配置间隔多久检查1次,检测需要关闭的空闲连接，单位是毫秒*/
-        dataSource.setTimeBetweenEvictionRunsMillis(6000);
-        /*连接在池中最小生存的时间，单位是毫秒*/
-        dataSource.setMinEvictableIdleTimeMillis(3000);
-        /*打开PSCache，并且指定每个连接上PSCache的大小*/
-        dataSource.setPoolPreparedStatements(true);
-        dataSource.setMaxPoolPreparedStatementPerConnectionSize(20);
-        /*通过connectProperties属性来打开mergeSql功能*/
-        //dataSource.setConnectProperties("=druid.stat.mergeSql=true");
-
-        dataSource.setValidationQuery("SELECT * FROM DUAL");
-
-        dataSource.setFilters("stat,wall,slf4j");
-        dataSource.init();
-        return dataSource;
+//        DruidDataSource dataSource = new DruidDataSource();
+//        dataSource.setUsername(this.userName);
+//        dataSource.setPassword(this.passWord);
+//        dataSource.setDriverClassName(this.driver);
+//        dataSource.setUrl(this.oracleUrl);
+//        dataSource.setInitialSize(this.initialSize);
+//        dataSource.setMinIdle(this.minIdle);
+//        dataSource.setMaxActive(this.maxActive);
+//        dataSource.setMaxWait(this.maxWait);
+//        /*配置间隔多久检查1次,检测需要关闭的空闲连接，单位是毫秒*/
+//        dataSource.setTimeBetweenEvictionRunsMillis(this.timeBetweenEvictionRunsMillis);
+//        /*连接在池中最小生存的时间，单位是毫秒*/
+//        dataSource.setMinEvictableIdleTimeMillis(this.minEvictableIdleTimeMillis);
+//        /*打开PSCache，并且指定每个连接上PSCache的大小*/
+//        dataSource.setPoolPreparedStatements(this.poolPreparedStatements);
+//        dataSource.setMaxPoolPreparedStatementPerConnectionSize(this.maxPoolPreparedStatementPerConnectionSize);
+//        //dataSource.setAsyncCloseConnectionEnable(this.asyncCloseConnectionEnable);
+//        /*通过connectProperties属性来打开mergeSql功能*/
+//        //dataSource.setConnectProperties("=druid.stat.mergeSql=true");
+//        dataSource.setTestOnBorrow(this.testOnBorrow);
+//        dataSource.setTestOnReturn(this.TestOnReturn);
+//        dataSource.setTestWhileIdle(this.testWhileIdle);
+//        dataSource.setValidationQuery(this.validationQuery);
+//        //dataSource.setValidationQueryTimeout(this.validationQueryTimeout);
+//        dataSource.setConnectProperties(this.connectProperties);
+//        dataSource.setFilters(this.filters);
+//        dataSource.init();
+        return new DruidDataSource();
 
     }
 }

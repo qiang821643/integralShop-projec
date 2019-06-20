@@ -32,11 +32,11 @@ public class GoodsServiceImpl implements GoodsService {
             pageNum = pageNum == null ? 1 : pageNum;
             pageSize = pageSize == null ? 10 : pageSize;
             List<AppGoodsPage> goodsList = integralGoodsMapper.findGoods(param);
-            goodsList.forEach(a->{
+            goodsList.forEach(a -> {
                 IntegralFile fileEntity = new IntegralFile();
                 fileEntity.setGoods_id(a.getId());
                 List<IntegralFile> file = fileMapper.findByParam(fileEntity);
-                if(file!=null && !file.isEmpty()){
+                if (file != null && !file.isEmpty()) {
                     a.setFile_path(file.get(0).getFile_path());
                 }
 
@@ -85,37 +85,40 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public Result goodsDetail(Integer goodsId) {
-        if(goodsId!=null) {
+        if (goodsId != null) {
             IntegralGoods goods = new IntegralGoods();
             goods.setId(goodsId);
             goods.setStatus(Constant.ENABLE);
             IntegralGoods goodsEntity = integralGoodsMapper.findOne(goods);
 
             GoodsDetailParam param = new GoodsDetailParam();
-            if(goodsEntity!=null) {
+            if (goodsEntity != null) {
                 //查询规格
                 param.setGoods(goodsEntity);
                 List<Map<String, Object>> spec = integralGoodsMapper.goodsSpec(goodsId);
                 IntegralFile file = new IntegralFile();
                 file.setGoods_id(goodsEntity.getId());
                 List<IntegralFile> parentsFile = fileMapper.findByParam(file);
-                param.setSpecifications(spec==null?null:spec);
+                param.setSpecifications(spec == null ? null : spec);
                 List<String> parentsPath = new ArrayList<>();
-                if(parentsFile!=null && !parentsFile.isEmpty()){
-                    parentsFile.forEach(a->{
+                if (parentsFile != null && !parentsFile.isEmpty()) {
+                    parentsFile.forEach(a -> {
                         parentsPath.add(a.getFile_path());
                     });
                 }
                 param.setParentPath(parentsPath);
-
-                IntegralFile sunfile = new IntegralFile();
-                sunfile.setId(parentsFile.get(0).getSun_id());
-                IntegralFile sunFile = fileMapper.findOne(sunfile);
-                param.setSunPath(sunFile==null?null:sunFile.getFile_path());
+                IntegralFile sunFile = null;
+                Integer sunId = parentsFile != null ? 0 : parentsFile.get(0).getSun_id();
+                if(sunId!=0) {
+                    IntegralFile sunfile = new IntegralFile();
+                    sunfile.setId(sunId);
+                    sunFile = fileMapper.findOne(sunfile);
+                }
+                param.setSunPath(sunFile == null ? null : sunFile.getFile_path());
             }
-            return Result.ok(Result.build(),"",param);
+            return Result.ok(Result.build(), "", param);
         }
-        return Result.error(Result.build(),"未查询到该商品，请刷新页面","");
+        return Result.error(Result.build(), "未查询到该商品，请刷新页面", "");
     }
 
     /**
@@ -130,13 +133,13 @@ public class GoodsServiceImpl implements GoodsService {
         IntegralGoods goods = new IntegralGoods();
         goods.setId(goodId);
         IntegralGoods goodsEntity = integralGoodsMapper.findOne(goods);
-        if(goodsEntity==null){
-            return Result.error(Result.build(),"该商品不存在请刷新页面","");
+        if (goodsEntity == null) {
+            return Result.error(Result.build(), "该商品不存在请刷新页面", "");
         }
         goods.setStatus(action);
         integralGoodsMapper.update(goods);
         goods.setStatus("");
-        return Result.ok(Result.build(),"","");
+        return Result.ok(Result.build(), goodsEntity.getGoods_name()+action+"成功", "");
     }
 
 
