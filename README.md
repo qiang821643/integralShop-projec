@@ -17,16 +17,16 @@
   		|
   		|-com.integral.constant
   		|
-		  |-com.integral.controller
+		|-com.integral.controller
   		|             |
- 	     |             |-com.integral.controller.pcController 
-          |             |
-  	    |             |-com.integral.controller.terminalController 
- 	     |
+ 	        |             |-com.integral.controller.pcController 
+                |             |
+  	        |             |-com.integral.controller.terminalController 
+ 	        |
   		|-com.integral.exception/
-          |
+                |
   		|-com.integral.interceptior 
-      	|
+      	        |
   		|-com.integral.mapper
   		|
   		|-com.integral.model
@@ -38,10 +38,10 @@
   		|              |-com.integral.service.base
   		|              |           |
 	  	|              |           |-com.integral.service.base.impl
- 	     |              |
+ 	        |              |
   		|              |-com.integral.service.impl
- 	     |
-          |-com.integral.util
+ 	        |
+                |-com.integral.util
   		|
   		|-IntegralApplication.java
 
