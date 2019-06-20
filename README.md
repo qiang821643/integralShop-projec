@@ -10,38 +10,38 @@
 <li> http://localhost:8089/druid/login.html</li>
 </ol>
 
-  com.integral
-  |
-  |____________config \n
-  |
-  |____________constant \n
-  |
-  |____________controller \n
-  |             |
-  |             |__________pcController \n
-  |             |
-  |             |__________terminalController \n
-  |
-  |_____________exception \n
-  |
-  |_____________nterceptior \n
-  |
-  |_____________mapper
-  |
-  |_____________model
-  |
-  |_____________security
-  |
-  |_____________service
-  |              |
-  |              |__________base
-  |              |           |
-  |              |           |_______impl
-  |              |
-  |              |__________impl
-  |
-  |_____________util
-  |
-  |______________________________________IntegralApplication.java
+      com.integral
+  		|
+  		|-com.integral.config
+  		|
+  		|-com.integral.constant
+  		|
+		  |-com.integral.controller
+  		|             |
+ 	    |             |-com.integral.controller.pcController 
+      |             |
+  	  |             |-com.integral.controller.terminalController 
+ 	    |
+  		|-com.integral.exception 
+      | 
+  		|-com.integral.nterceptior 
+   		|
+  		|-com.integral.mapper
+  		|
+  		|-com.integral.model
+  		|
+  		|-com.integral.security
+ 		  |
+  		|-com.integral.service
+  		|              
+  		|              |-com.integral.service.base
+  		|              |           |
+	  	|              |           |-com.integral.service.base.impl
+ 	    |              |
+  		|              |-com.integral.service.impl
+ 	    |
+      |-com.integral.util
+  		|
+  		|-IntegralApplication.java
 
 ##项目结构后期往上补
