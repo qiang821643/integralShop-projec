@@ -23,7 +23,7 @@
             |             |
   	        |             |-com.integral.controller.terminalController 
  	        |
-  		|-com.integral.exception/
+  		|-com.integral.exception
                 |
   		|-com.integral.interceptior 
       	        |
