@@ -9,7 +9,7 @@
 <li> Swagger2登陆地址http://localhost:8089/swagger-ui.html</li>
 <li> http://localhost:8089/druid/login.html</li>
 </ol>
-<div>
+
   com.integral
   |
   |____________config
@@ -43,5 +43,5 @@
   |_____________util
   |
   |______________________________________IntegralApplication.java
-</div>
+
 ##项目结构后期往上补
