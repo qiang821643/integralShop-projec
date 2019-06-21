@@ -72,3 +72,13 @@ fdfs:
 
 ##ngnix地址
 file-url: http://localhost:8502/
+
+eureka:
+  client:
+    service-url:
+      dafaultZone: http://182.61.53.74:8080/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: IntegralShop:${spring.cloud.client.ip-address}:${server.port}
+    lease-renewal-interval-in-seconds: 50000
+    lease-expiration-duration-in-seconds: 5
