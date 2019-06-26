@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.integral.mapper.IntegralitemCssMapper">
+
+    <insert id="insert" parameterType="com.integral.model.IntegralitemCcs">
+        insert into integral_item_ccs(ID,INTEGRAL_ITEM_ID,COUNT,ADDRESSEE,ADRESS,PHONE,SENDER,SENDER_PHONE,SEND_ADDRESS,
+        POSTAGE,LOGISTICS_COMPANY,COURIER_NUMBER,CREATE_DATE,UPDATE_DATE)
+        values(#{id,jdbcType=DECIMAL},#{integral_item_id,jdbcType=DECIMAL},#{count,jdbcType=DECIMAL},#{addressee,jdbcType=VARCHAR},
+        #{address,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR},
+        #{sender,jdbcType=VARCHAR},#{sender_phone,jdbcType=VARCHAR},#{sender_address,jdbcType=VARCHAR},
+        #{postage,jdbcType=VARCHAR},#{logistics_company,jdbcType=VARCHAR},#{courier_number,jdbcType=VARCHAR},
+        #{create_date},#{update_date})
+    </insert>
+
+
+
+</mapper>

@@ -8,17 +8,27 @@
 		<version>2.1.5.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.integral</groupId>
-	<artifactId>integral-shop-project</artifactId>
+	<groupId>com.supermarket.platform</groupId>
+	<artifactId>supermarket-platform</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>integralShop</name>
-	<description>Demo project for Spring Boot</description>
+	<name>supermarketProject</name>
+	<description>supermarket-platform</description>
 
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
-
+	
+	<modules>
+    	<module>oauth</module>
+		<module>integral</module>
+		<module>pay</module>
+		<module>secondPurchase</module>
+		<module>shop</module>
+		<module>supplier</module>
+  	</modules>
+	
 	<dependencies>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
@@ -35,6 +45,18 @@
 			</exclusions>
 		</dependency>
 
+		<!--redis客户端-->
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>2.9.1</version>
+		</dependency>
+		<!-- 必须加上，jedis依赖此  -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-pool2</artifactId>
+			<version>2.4.3</version>
+		</dependency>
 
 
 		<dependency>
@@ -54,7 +76,6 @@
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>2.0.1</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
@@ -71,17 +92,20 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!--oracle驱动包-->
+
 		<dependency>
-			<groupId>com.jslsolucoes</groupId>
+			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc6</artifactId>
-			<version>11.2.0.1.0</version>
+			<version>11.2.0.3</version>
 		</dependency>
+
+
 		<!--分页-->
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
@@ -97,25 +121,6 @@
 			<optional>true</optional>
 		</dependency>
 
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>druid-spring-boot-starter</artifactId>
-			<version>1.1.0</version>
-			<type>pom</type>
-		</dependency>
-
-		<!--redis客户端-->
-		<dependency>
-			<groupId>redis.clients</groupId>
-			<artifactId>jedis</artifactId>
-			<version>2.9.1</version>
-		</dependency>
-		<!-- 必须加上，jedis依赖此  -->
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-pool2</artifactId>
-			<version>2.4.3</version>
-		</dependency>
 		<!--appach包-->
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -125,7 +130,7 @@
 		<dependency>
 			<groupId>apache-lang</groupId>
 			<artifactId>commons-lang</artifactId>
-            <version>2.0</version>
+			<version>2.0</version>
 		</dependency>
 		<!--日志-->
 		<dependency>
@@ -133,7 +138,6 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.13</version>
 		</dependency>
-
 
 		<dependency>
 			<groupId>com.alibaba</groupId>

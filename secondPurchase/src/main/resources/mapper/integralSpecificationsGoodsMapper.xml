@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.integral.mapper.IntegralSpecificationsGoodsMapper">
+
+    <insert id="insert" parameterType="com.integral.model.IntegralSpecificationsGoods">
+        insert into INTEGRAL_SPECIFICATIONS_GOODS(ID,INTEGRAL_SPECIFICATIONS_ID,SPECIFICATIONS_VALUE_ID,GOODS_COUNT,)
+        values(SEQ_SPECIFICATIONS_GOODS.NEXTVAL,#{integralSpecificationsId,jdbcType=DECIMAL},
+        #{specifications_value_Id,jdbcType=DECIMAL},#{goods_count,jdbcType=DECIMAL})
+    </insert>
+
+    <delete id="deleteBatch" parameterType="list">
+        delete from INTEGRAL_SPECIFICATIONS_GOODS where
+        <foreach item="itens" index="index"  collection="list" open="(" separator="," close=")">
+            #{items}
+        </foreach>
+    </delete>
+    <delete id="delete" parameterType="Integer">
+        delete from INTEGRAL_SPECIFICATIONS_GOODS where INTEGRAL_GOODS_ID=#{id}
+    </delete>
+</mapper>

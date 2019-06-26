@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.integral.mapper.IntegralSpecificationsValueMapper">
+
+
+    <insert id="insert" parameterType="com.integral.model.IntegralSpecificationsValue">
+        insert into integral_specifications_value(ID,VALUE,INTEGRAL_SPECIFICATIONS_ID)
+        values(SEQ_INTEGRAL_SPECIFICATIONS.nextval,#{value,jdbcType=VARCHAR},#{integral_specifications_id,jdbcType=DECIMAL})
+    </insert>
+
+
+</mapper>

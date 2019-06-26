@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.integral.mapper.IntegralFileMapper">
+
+    <insert id="insert" parameterType="com.integral.model.IntegralFile">
+        insert into Integral_File(ID,FILE_PATH,STATUS,SUN_ID,CREATE_DATE,GOODS_ID)
+        values(#{id,jdbcType=DECIMAL},
+        #{file_path,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},#{sun_id,jdbcType=DECIMAL},#{create_date},#{goods_id,jdbcType=VARCHAR})
+    </insert>
+
+    <delete id="delete" parameterType="Integer">
+        delete from Integral_File where id=#{id}
+    </delete>
+
+    <delete id="deleteBatch" parameterType="list">
+        delete from Integral_File where id in
+        <foreach item="items" index="index" collection="list" open="(" separator="," close=")">
+            #{items}
+        </foreach>
+    </delete>
+
+    <select id="findByParam" parameterType="com.integral.model.IntegralFile" resultType="com.integral.model.IntegralFile">
+        select * from Integral_File
+        <where>
+            1=1
+            <if test="id!=null and id!=''">
+                and id=#{id}
+            </if>
+            <if test="goods_id!=null and goods_id!=''">
+                and goods_id=#{goods_id}
+            </if>
+        </where>
+    </select>
+    <select id="findOne"  parameterType="com.integral.model.IntegralFile" resultType="com.integral.model.IntegralFile">
+        select * from Integral_File
+        <where>
+            1=1
+            <if test="id!=null and id!=''">
+                and id=#{id}
+            </if>
+            <if test="goods_id!=null and goods_id!=''">
+                and goods_id=#{goods_id}
+            </if>
+        </where>
+    </select>
+</mapper>

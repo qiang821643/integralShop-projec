@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.integral.mapper.IntegralReceiptinfoMapper">
+
+    <select id="findByParam" parameterType="com.integral.model.IntegralReceiptinfo"
+            resultType="com.integral.model.IntegralReceiptinfo">
+        select * from integral_receiptinfo
+        <where>
+            1=1
+            <if test="integral_member_ccs_id!=null and integral_member_ccs_id!=''">
+                and INTEGRAL_MEMBER_CCS_ID=#{integral_member_ccs_id}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insert" parameterType="com.integral.model.IntegralReceiptinfo">
+        insert into integral_receiptinfo(ID,INTEGRAL_MEMBER_CCS_ID,ADDRESS,PHONE,ADDRESSEE,POSTAL_CODE,CREATE_DATE,STATUS)
+        values
+        (#{id},#{integral_member_ccs_id,jdbcType=DECIMAL},#{address,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR},
+        #{addressee},#{postal_code,jdbcType=VARCHAR},#{create_date},#{status,jdbcType=VARCHAR})
+    </insert>
+
+</mapper>
