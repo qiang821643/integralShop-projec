@@ -1,4 +1,4 @@
-package com.integral.security;
+package com.security;
 
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
