@@ -1,8 +1,8 @@
 package com.security;
 
-import com.integral.constant.Constant;
-import com.integral.mapper.IntegralSupplierMapper;
-import com.integral.model.IntegralSupplier;
+import com.constant.Constant;
+import com.mapper.IntegralSupplierMapper;
+import com.model.IntegralSupplier;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
