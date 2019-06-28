@@ -1,6 +1,5 @@
 ##项目结构 
     
-    
     supermarket-platform 超市平台
     |
     |--integral 积分
