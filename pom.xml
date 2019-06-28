@@ -26,6 +26,7 @@
         <module>secondPurchase</module>
         <module>shop</module>
         <module>supplier</module>
+        <module>common</module>
     </modules>
 
     <dependencies>
