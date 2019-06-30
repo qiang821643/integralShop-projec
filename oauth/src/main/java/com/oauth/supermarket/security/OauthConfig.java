@@ -1,9 +1,13 @@
 package com.oauth.supermarket.security;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -24,8 +28,10 @@ import java.util.List;
  * @date:2019/6/27
  **/
 
+@Configuration
 //开启认证服务注解
 @EnableAuthorizationServer
+@Slf4j
 public class OauthConfig extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
@@ -35,6 +41,8 @@ public class OauthConfig extends AuthorizationServerConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Bean
     public TokenStore tokenStore(){
@@ -47,29 +55,45 @@ public class OauthConfig extends AuthorizationServerConfigurerAdapter {
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.tokenKeyAccess("permitAll()").checkTokenAccess("permitAll()").allowFormAuthenticationForClients();
+        security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()").allowFormAuthenticationForClients();
     }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-
-        clients.inMemory().withClient("integrall") //客户端ID
-                .secret("") // base64 的编码结果
-                .scopes("read","write")   //允许授权范围
+        String secret = passwordEncoder.encode("123");
+        log.info("secret--------->"+secret);
+        clients.inMemory().withClient("client") //客户端ID
+                .secret(secret) // base64 的编码结果
+                .scopes("read")   //允许授权范围
                 .authorizedGrantTypes("password","refresh_token") //设置验证方式  授权类型
-                .accessTokenValiditySeconds(10000) //token过期时间
-                .refreshTokenValiditySeconds(10000); //refresh_token过期时间
-
+                .accessTokenValiditySeconds(100000) //token过期时间
+                .refreshTokenValiditySeconds(100000); //refresh_token过期时间
+//        clients.inMemory().withClient("client")
+//                .authorizedGrantTypes("authorization_code","client_credentials","password","refresh_token")
+//                .scopes("test")
+//                .secret(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode("123"));
+//        clients
+//                .inMemory()
+//                .withClient("clientapp").secret(passwordEncoder.encode("123456"))
+//                .authorizedGrantTypes("password", "authorization_code", "refresh_token")
+//                .authorities("READ_ONLY_CLIENT")
+//                .scopes("read_profile_info")
+//                .resourceIds("oauth2-resource")
+//                .redirectUris("http://localhost:8091/login")
+//                .accessTokenValiditySeconds(120)
+//                .refreshTokenValiditySeconds(240000);
     }
 
-    /**
-     *密码模式下配置认证管理器 AuthenticationManager,并且设置 AccessToken的存储介质tokenStore,如果不设置，则会默认使用内存当做存储介质
-     * @param endpoints
-     * @throws Exception
-     */
+
+//     密码模式下配置认证管理器 AuthenticationManager,并且设置 AccessToken的存储介质tokenStore,如果不设置，则会默认使用内存当做存储介质
+//      @param endpoints
+//     @throws Exception
+
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 
-        endpoints.tokenStore(tokenStore()).authenticationManager(authenticationManager).userDetailsService(supplierDetails);
+        endpoints.tokenStore(tokenStore())
+                .authenticationManager(authenticationManager)
+                .userDetailsService(supplierDetails);
     }
 }

@@ -16,10 +16,10 @@ import org.springframework.jmx.support.RegistrationPolicy;
 @Import(FdfsClientConfig.class)
 @EnableMBeanExport(registration = RegistrationPolicy.IGNORE_EXISTING)
 @SpringBootApplication
-public class OauthApp {
+public class SupermarketOauthApp {
 
     public static void main(String[] args) {
 
-        SpringApplication.run(OauthApp.class, args);
+        SpringApplication.run(SupermarketOauthApp.class, args);
     }
 }
