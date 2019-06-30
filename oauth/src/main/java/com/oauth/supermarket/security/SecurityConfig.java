@@ -54,7 +54,7 @@ public class SecurityConfig extends  WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
 
-
+//
 //           http.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //使用JWT关闭token
 //                    .and()
 //                    .httpBasic().authenticationEntryPoint(myAuthencationEntryPoint)
@@ -73,12 +73,12 @@ public class SecurityConfig extends  WebSecurityConfigurerAdapter {
 //                   .and().authorizeRequests().anyRequest().authenticated();
 //
 //            http.exceptionHandling().accessDeniedHandler(accessDeniedHandler);
-//            http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+            //http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
 
 
 
-        http.authorizeRequests().antMatchers("/").permitAll().and().csrf().disable();
+        //http.authorizeRequests().antMatchers("/").permitAll().and().csrf().disable();
 
 
 
