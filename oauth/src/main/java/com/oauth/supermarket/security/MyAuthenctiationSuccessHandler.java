@@ -1,4 +1,4 @@
-package com.security;
+package com.oauth.supermarket.security;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,4 +1,4 @@
-package com.model;
+package com.oauth.supermarket.model;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.mapper;
+package com.oauth.supermarket.mapper;
 
 import org.apache.ibatis.annotations.Param;
 

@@ -1,4 +1,4 @@
-package com.security;
+package com.oauth.supermarket.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

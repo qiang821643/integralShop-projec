@@ -1,4 +1,4 @@
-package com.constant;
+package com.oauth.supermarket.constant;
 
 public interface Constant {
 
