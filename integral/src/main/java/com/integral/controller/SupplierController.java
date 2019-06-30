@@ -9,14 +9,7 @@ import io.swagger.annotations.Contact;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.DefaultRedirectStrategy;
-import org.springframework.security.web.RedirectStrategy;
-import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
-import org.springframework.security.web.savedrequest.RequestCache;
-import org.springframework.security.web.savedrequest.SavedRequest;
+
 import org.springframework.web.bind.annotation.*;
 import com.integral.model.IntegralSupplier;
 import com.integral.model.RegisterEnttity;
@@ -38,10 +31,6 @@ public class SupplierController {
     private UserNameService userNameService;
     @Autowired
     private IntegralSupplierMapper supplierMapper;
-
-    private RequestCache requestCache = new HttpSessionRequestCache();
-
-    private RedirectStrategy strategy = new DefaultRedirectStrategy();
 
     @ApiOperation(value = "修改密码",notes = "")
     @GetMapping("/update")
@@ -66,35 +55,5 @@ public class SupplierController {
     }
 
 
-    @GetMapping("/login")
-    public UserDetails login(@RequestParam(name = "userName") @NotNull(message = "账户不能为空") String userName,
-                             @RequestParam(name = "pwd") @NotNull(message = "密码不能为空") String pwd){
-        IntegralSupplier supplier = new IntegralSupplier();
-        supplier.setStatus(Constant.ENABLE);
-        supplier.setUser_name(userName);
-        IntegralSupplier supplier1 = supplierMapper.findOne(supplier);
-        UserDetails userDetails = new User(supplier1.getUser_name(),supplier1.getPwd(),true,
-                true,true,true,
-                AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
-        return userDetails;
 
-    }
-
-
-
-
-
-    @RequestMapping("/authentication/require")
-    @ResponseStatus(code = HttpStatus.UNAUTHORIZED)
-    public Result requireAuthentication(HttpServletRequest request,HttpServletResponse response)throws IOException{
-
-        SavedRequest savedRequest = requestCache.getRequest(request,response);
-        if(savedRequest!=null){
-            String targetUrl = savedRequest.getRedirectUrl();
-            if(!StringUtils.equalsIgnoreCase(targetUrl,".html")){
-                strategy.sendRedirect(request,response,"/login.html");
-            }
-        }
-        return  Result.error(Result.build(),"请先登录","/login.html");
-    }
 }

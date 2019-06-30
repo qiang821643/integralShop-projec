@@ -8,7 +8,7 @@ import com.integral.model.IntegralHistory;
 import com.integral.model.IntegralMemberCcs;
 import com.integral.model.IntegralReceiptinfo;
 import com.integral.model.Result;
-import com.integral.security.JwtTokenUtil;
+
 import com.integral.service.base.MemberCssService;
 import com.integral.util.TimeUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -40,8 +40,7 @@ public class MemberCssServiceImpl implements MemberCssService {
     private IntegralHistoryMapper historyMapper;
     @Autowired
     private IntegralReceiptinfoMapper receiptinfoMapper;
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+
     /**
      * 账户同步
      *
@@ -64,8 +63,6 @@ public class MemberCssServiceImpl implements MemberCssService {
         Map<String,Object> idMap = new HashMap<>();
 
         if (memberCcsOne!=null) {
-            String jwt = jwtTokenUtil.generateToken(zMember.get("MACCOUNT").toString(),"admin",memberCcsOne.getId());
-            idMap.put("jwt",jwt);
             idMap.put("id",memberCcsOne.getId());
             return Result.ok(Result.build(), "", idMap);
         }

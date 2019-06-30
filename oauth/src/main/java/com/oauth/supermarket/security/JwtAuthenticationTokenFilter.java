@@ -1,4 +1,4 @@
-package com.security;
+package com.oauth.supermarket.security;
 
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;

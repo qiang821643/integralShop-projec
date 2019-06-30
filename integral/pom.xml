@@ -10,6 +10,7 @@
     </parent>
     <artifactId>integral</artifactId>
     <name>integralProject</name>
+    <packaging>pom</packaging>
     <url>http://maven.apache.org</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

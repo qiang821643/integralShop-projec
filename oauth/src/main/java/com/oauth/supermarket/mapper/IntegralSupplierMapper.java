@@ -1,7 +1,7 @@
-package com.mapper;
+package com.oauth.supermarket.mapper;
 
 
-import com.model.IntegralSupplier;
+import com.oauth.supermarket.model.IntegralSupplier;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

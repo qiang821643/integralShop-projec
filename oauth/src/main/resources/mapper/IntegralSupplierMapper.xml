@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="com.integral.mapper.IntegralSupplierMapper">
+<mapper namespace="com.oauth.supermarket.mapper.IntegralSupplierMapper">
 
-    <select id="queryByUserName" parameterType="String" resultType="com.integral.model.IntegralSupplier">
+    <select id="queryByUserName" parameterType="String" resultType="com.oauth.supermarket.model.IntegralSupplier">
         select * from INTEGRAL_SUPPLIER
         <where>
             <if test="userName!=null and userName!=''">
@@ -17,7 +17,7 @@
         update INTEGRAL_SUPPLIER set pwd=#{pwd} where user_name=#{userName}
     </update>
 
-    <insert id="insertSuppiler" parameterType="com.integral.model.IntegralSupplier">
+    <insert id="insertSuppiler" parameterType="com.oauth.supermarket.model.IntegralSupplier">
 
         insert into integral_supplier(ID,USER_NAME,PWD,SUPPLIER_NAME,POINTS_COUNT,ADDRESS,PERSON_LIABLE,PHONE,CREATE_DATE,STATUS,EMAIL)
         values (SEQ_SUPPLIER.nextval,#{user_name,jdbcType=VARCHAR},#{pwd,jdbcType=VARCHAR},#{supplier_name,jdbcType=VARCHAR},
@@ -25,7 +25,7 @@
         #{create_date},#{status,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR})
     </insert>
 
-    <update id="update" parameterType="com.integral.model.IntegralSupplier">
+    <update id="update" parameterType="com.oauth.supermarket.model.IntegralSupplier">
         update INTEGRAL_SUPPLIER
         <set>
             <if test="points_count!=null and points_count!=''">
@@ -34,8 +34,8 @@
         </set>
     </update>
 
-    <select id="findByParam" parameterType="com.integral.model.IntegralSupplier"
-            resultType="com.integral.model.IntegralSupplier">
+    <select id="findByParam" parameterType="com.oauth.supermarket.model.IntegralSupplier"
+            resultType="com.oauth.supermarket.model.IntegralSupplier">
         select * from INTEGRAL_SUPPLIER
         <where>
             1=1
@@ -46,8 +46,8 @@
         </where>
     </select>
 
-    <select id="findOne" parameterType="com.integral.model.IntegralSupplier"
-            resultType="com.integral.model.IntegralSupplier">
+    <select id="findOne" parameterType="com.oauth.supermarket.model.IntegralSupplier"
+            resultType="com.oauth.supermarket.model.IntegralSupplier">
         select * from INTEGRAL_SUPPLIER
         <where>
             1=1

@@ -1,9 +1,6 @@
 package com.integral.interceptor;
 
-import com.alibaba.fastjson.JSONObject;
-import com.integral.mapper.IntegralMemberCcsMapper;
-import com.integral.model.IntegralMemberCcs;
-import com.integral.security.JwtTokenUtil;
+
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +21,7 @@ import java.io.IOException;
 @Slf4j
 public class PhoneInterceptor implements HandlerInterceptor {
 
-    @Autowired
+   /* @Autowired
     private IntegralMemberCcsMapper memberCcsMapper;
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
@@ -67,5 +64,5 @@ public class PhoneInterceptor implements HandlerInterceptor {
         }
 
 
-    }
+    }*/
 }
