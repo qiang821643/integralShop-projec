@@ -58,6 +58,13 @@ public class OauthConfig extends AuthorizationServerConfigurerAdapter {
         security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()").allowFormAuthenticationForClients();
     }
 
+    /**
+     * 密码模式
+     * post请求
+     * http://localhost:8091/oauth/token?grant_type=password&username=a&password=123&client_id=client&client_secret=123&scope=read
+     * @param clients
+     * @throws Exception
+     */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         String secret = passwordEncoder.encode("123");
