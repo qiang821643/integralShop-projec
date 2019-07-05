@@ -1,0 +1,7 @@
+security:
+  oauth2:
+    client:
+      client-id:
+      client-secret:
+      scope:
+      auto-approve-scopes:

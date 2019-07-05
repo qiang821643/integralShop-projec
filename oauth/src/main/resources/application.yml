@@ -3,6 +3,7 @@ server:
   port: 8091
 
 
+##认证服务器
 spring:
   application:
     name: oauth-server
@@ -83,3 +84,4 @@ eureka:
     instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
     lease-renewal-interval-in-seconds: 5
     lease-expiration-duration-in-seconds: 10
+
