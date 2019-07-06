@@ -13,3 +13,5 @@
     |--shop 商城
     |
     |--supplier 供货商
+    |
+    |--common 公共包
