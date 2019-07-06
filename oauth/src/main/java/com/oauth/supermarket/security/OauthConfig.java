@@ -16,6 +16,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
@@ -46,10 +47,12 @@ public class OauthConfig extends AuthorizationServerConfigurerAdapter {
 
     @Bean
     public TokenStore tokenStore(){
-        //使用内存中的token
 
+        //使用reids中的AccessToken
+        //return new RedisTokenStore();
+        //使用内存中的 AccessToken
         return new InMemoryTokenStore();
-        //数据库中的token
+        //数据库中的AccessToken
         //return new JdbcTokenStore();
     }
 
@@ -59,14 +62,23 @@ public class OauthConfig extends AuthorizationServerConfigurerAdapter {
     }
 
     /**
+     *
      * 密码模式
      * post请求
      * http://localhost:8091/oauth/token?grant_type=password&username=a&password=123&client_id=client&client_secret=123&scope=read
+     * /oauth/token?grant_type=password #请求授权token
+     *
+     * /oauth/token?grant_type=refresh_token #刷新token
+     *
+     * /oauth/check_token #校验token
+     *
+     * /logout #注销token及权限相关信息
      * @param clients
      * @throws Exception
      */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        //客户端认证
         String secret = passwordEncoder.encode("123");
         log.info("secret--------->"+secret);
         clients.inMemory().withClient("client") //客户端ID
@@ -99,7 +111,7 @@ public class OauthConfig extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 
-        endpoints.tokenStore(tokenStore())
+        endpoints.tokenStore(tokenStore()) //token存储
                 .authenticationManager(authenticationManager)
                 .userDetailsService(supplierDetails);
     }
