@@ -15,7 +15,7 @@ spring:
   datasource:
     url: jdbc:oracle:thin:@47.94.251.90:1521:ORCL
     username: kaifa
-    password: zsl.com
+    password: 39ec2728e2a948b8a5a2dc68ee2d6642a94ae583
     driver-class-name: oracle.jdbc.OracleDriver
     type: com.alibaba.druid.pool.DruidDataSource
 
