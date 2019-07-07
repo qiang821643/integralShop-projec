@@ -1,15 +1,17 @@
-##项目结构
+##项目结构 
+    
     supermarket-platform 超市平台
     |
-    |--integral  积分
+    |--integral 积分
     |
-    |--oauth     认证
+    |--oauth 认证
     |
-    |--pay       支付
+    |--pay 支付
     |
-    |--secondPurchase  秒杀
+    |--secondPurchase 秒杀
     |
-    |--shop       商城
+    |--shop 商城
     |
-    |--supplier    供货商
-    
+    |--supplier 供货商
+    |
+    |--common 公共包

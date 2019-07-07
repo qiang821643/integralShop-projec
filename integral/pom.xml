@@ -8,19 +8,20 @@
         <artifactId>supermarket-platform</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+
+    <groupId>com.supermarket.platform</groupId>
     <artifactId>integral</artifactId>
     <name>integralProject</name>
-    <packaging>pom</packaging>
-    <url>http://maven.apache.org</url>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
-        <dependency>
+        <!--<dependency>
             <groupId>com.supermarket.platform</groupId>
             <artifactId>common</artifactId>
             <version>1.0-RELEASE</version>
-        </dependency>
+        </dependency>-->
     </dependencies>
 </project>

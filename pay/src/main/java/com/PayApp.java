@@ -18,6 +18,7 @@ import org.springframework.jmx.support.RegistrationPolicy;
 @SpringBootApplication
 public class PayApp {
     public static void main(String[] args) {
+		System.out.println("ÄãºÃ");
         SpringApplication.run(PayApp.class, args);
     }
 }
