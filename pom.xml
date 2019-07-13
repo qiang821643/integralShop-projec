@@ -161,6 +161,12 @@
             <classifier>sources</classifier>
             <type>java-source</type>
         </dependency>
+        <!--hutool包-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>4.5.16</version>
+        </dependency>
     </dependencies>
 
     <!--控制每个model的版本号-->
