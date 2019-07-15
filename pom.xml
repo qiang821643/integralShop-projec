@@ -22,7 +22,7 @@
 
     <modules>
         <module>oauth</module>
-        <!--<module>integral</module>-->
+        <module>integral</module>
         <module>pay</module>
         <module>secondPurchase</module>
         <module>shop</module>
