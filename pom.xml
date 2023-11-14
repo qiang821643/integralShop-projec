@@ -135,7 +135,7 @@
         <dependency>
             <groupId>com.github.tobato</groupId>
             <artifactId>fastdfs-client</artifactId>
-            <version>1.26.1-RELEASE</version>
+            <version>1.26.6</version>
         </dependency>
         <!--swagger-->
         <dependency>
@@ -151,7 +151,7 @@
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
-            <version>0.9.0</version>
+            <version>0.12.0</version>
         </dependency>
         <!--谷歌集合工具包-->
         <dependency>
